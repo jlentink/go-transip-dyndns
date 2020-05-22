@@ -25,6 +25,7 @@ func GetIP() (*IP, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer res.Body.Close() // nolint: errcheck
 
 	if res.StatusCode != 200 {
 		return nil, fmt.Errorf("http status should be 200 is %d", res.StatusCode)

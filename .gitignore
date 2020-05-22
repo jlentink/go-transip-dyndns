@@ -1,0 +1,33 @@
+# Created by .ignore support plugin (hsz.mobi)
+### Go template
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.zip
+*.tbz2
+*.tgz
+*.key
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+
+# Dependency directories (remove the comment below to include it)
+# vendor/
+
+.idea/.gitignore
+.idea/go-transip-dyndns.iml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+cmd/transip-dyndns/private.key
+cmd/transip-dyndns/transip-dyndns
+cmd/transip-dyndns/transip.toml
+go.mod
+go.sum
+internal/gipify/get_test.go

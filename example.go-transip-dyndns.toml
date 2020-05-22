@@ -1,0 +1,8 @@
+username = "username"
+private-key = "/path/to/private.key"
+
+verbose = false
+
+domain = "yourdomain.nl"
+domain-entry = "subdomain"
+domain-ttl = 60

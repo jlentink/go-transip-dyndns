@@ -20,7 +20,7 @@ clean:
 linting: golintci card
 
 golintci:
-	golangci-lint run
+	golangci-lint run ./...
 
 card:
 	goreportcard-cli -v -t 100

@@ -31,3 +31,5 @@ cmd/transip-dyndns/transip.toml
 go.mod
 go.sum
 internal/gipify/get_test.go
+/go-transip-dyndns.toml
+/.idea

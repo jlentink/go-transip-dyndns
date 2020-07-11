@@ -12,7 +12,7 @@ import (
 // Validate the setup so see all is alright
 func Validate(cmd *cobra.Command, args []string) {
 	fmt.Printf(" - Verify access to API.\n")
-	err := tld.InitTLD()
+	err := tld.InitTLD(config.Get().GetString("username"), config.Get().GetString("private-key"))
 	if err != nil {
 		emoji.Printf(":exclamation: Could not connect to API (%s)\n", err.Error())                   // nolint: errcheck
 		emoji.Printf("Please go to https://www.transip.nl/cp/account/api/ and create a key pair. " + // nolint: errcheck
@@ -21,6 +21,12 @@ func Validate(cmd *cobra.Command, args []string) {
 	} else {
 		emoji.Printf(":+1: Connection successful.\n") // nolint: errcheck
 	}
+
+	tld.SetRecordInformation(
+		config.Get().GetString("domain"),
+		config.Get().GetString("domain-entry"),
+		config.Get().GetInt("domain-ttl"),
+	)
 
 	fmt.Printf(" - Verify access to domain\n") // nolint: errcheck
 	dom, err := tld.FindDomain()

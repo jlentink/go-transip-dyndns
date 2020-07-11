@@ -31,8 +31,18 @@ domain-entry = "subdomain"
 domain-ttl = 60
 ```
 
+## Binaries available for download
+Binaries are available for download in multiple formats
+
+* Windows (32/64 Bit)
+* Linux Intel (32/64 Bit)
+* Linux ARM (32/64 Bit) - Run directly on most routers
+* MacOS 64 Bit
+
+Download them [here](https://github.com/jlentink/go-transip-dyndns/releases/latest).
+
 ## No association with Transip
-This tool has been created for me own comfort. There is no association with Transip. But thanks for there fine service!
+This tool has been created for me own comfort. There is no association with Transip. But I would like to thank TransIP for there fine service!
 
 ## PHP version
 [Previous version](https://github.com/jlentink/transip-dyndns) was build in PHP.

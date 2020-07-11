@@ -8,11 +8,12 @@ import (
 )
 
 var (
-	rootCmd = &cobra.Command{
+	ApplicationVersion = "1.0.0"
+	rootCmd            = &cobra.Command{
 		Use:     "dyndns",
 		Short:   "Update ip address on Transip DNS to current public ip ",
 		Long:    "Use the current ip to update to a record in the TransIP dns.\nAllowing for easy updating when your ip changes.",
-		Version: "1.0.0",
+		Version: ApplicationVersion,
 		Run:     commands.Update,
 	}
 	userName string

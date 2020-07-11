@@ -1,9 +1,8 @@
 .PHONY: all golint vet fmt test coverage scan build linux macos windows clean
 BUILT_HASH=$(shell git rev-parse --short HEAD)
-BUILT_VERSION=v1.0.0
-LDFLAGS=-ldflags "-w -s"
+BUILT_VERSION=v1.0.1
+LDFLAGS=-ldflags "-X main.ApplicationVersion=${BUILT_VERSION} -w -s"
 TRAVISBUILD?=off
-
 all: clean linting build
 
 clean:

@@ -15,10 +15,15 @@ func Create(cmd *cobra.Command, args []string) {
 	if err != nil {
 		logger.Get().Fatalf("Error getting IP address. (%s)", err.Error())
 	}
-	err = tld.InitTLD()
+	err = tld.InitTLD(config.Get().GetString("username"), config.Get().GetString("private-key"))
 	if err != nil {
 		logger.Get().Fatalf("Error accessing the API. please verify configuration (%s)", err.Error())
 	}
+	tld.SetRecordInformation(
+		config.Get().GetString("domain"),
+		config.Get().GetString("domain-entry"),
+		config.Get().GetInt("domain-ttl"),
+	)
 	_, err = tld.FindRecord()
 	if err == nil {
 		logger.Get().Fatalf("Record already exists. Use update from now on.")

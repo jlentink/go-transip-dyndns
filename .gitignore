@@ -33,3 +33,4 @@ go.sum
 internal/gipify/get_test.go
 /go-transip-dyndns.toml
 /.idea
+.DS_Store

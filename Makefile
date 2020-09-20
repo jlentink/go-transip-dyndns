@@ -26,7 +26,7 @@ card:
 
 build: linux macos windows
 
-linux: linux32 linux64 linuxarm linuxarm64
+linux: linux32 linux64 linuxarm linuxarm64 linuxpi
 
 windows: windows32 windows64
 
@@ -57,6 +57,15 @@ ifeq ("$(TRAVISBUILD)","off")
 endif
 	@cd ./builds/linux-386 && tar -jcf ../../go-transip-dyndns-linux-arm-${BUILT_VERSION}.tbz2 go-transip-dyndns README.md
 	@cd ./builds/linux-386 && tar -zcf ../../go-transip-dyndns-linux-arm-${BUILT_VERSION}.tgz go-transip-dyndns README.md
+
+linuxpi:
+	env GOOS=linux GOARCH=arm GOARM=5 go build ${LDFLAGS} -o ./builds/linux-pi/go-transip-dyndns
+	cp README.md ./builds/linux-pi/
+ifeq ("$(TRAVISBUILD)","off")
+	upx --brute ./builds/linux-pi/go-transip-dyndns
+endif
+	@cd ./builds/linux-pi && tar -jcf ../../go-transip-dyndns-linux-arm-pi-${BUILT_VERSION}.tbz2 go-transip-dyndns README.md
+	@cd ./builds/linux-pi && tar -zcf ../../go-transip-dyndns-linux-arm-pi-${BUILT_VERSION}.tgz go-transip-dyndns README.md
 
 
 linuxarm64:

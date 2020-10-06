@@ -1,6 +1,6 @@
 .PHONY: all golint vet fmt test coverage scan build linux macos windows clean
 BUILT_HASH=$(shell git rev-parse --short HEAD)
-BUILT_VERSION=v1.0.1
+BUILT_VERSION=v1.0.2
 LDFLAGS=-ldflags "-X main.ApplicationVersion=${BUILT_VERSION} -w -s"
 TRAVISBUILD?=off
 all: clean linting build
@@ -38,6 +38,8 @@ ifeq ("$(TRAVISBUILD)","off")
 endif
 	@cd ./builds/linux-amd64 && tar -jcf ../../go-transip-dyndns-linux-amd64-${BUILT_VERSION}.tbz2 go-transip-dyndns README.md
 	@cd ./builds/linux-amd64 && tar -zcf ../../go-transip-dyndns-linux-amd64-${BUILT_VERSION}.tgz go-transip-dyndns README.md
+	cp docker/Dockerfile ./builds/linux-amd64
+	cp docker/docker-compose.yml ./builds/linux-amd64
 
 
 linux32:
@@ -48,6 +50,9 @@ ifeq ("$(TRAVISBUILD)","off")
 endif
 	@cd ./builds/linux-386 && tar -jcf ../../go-transip-dyndns-linux-386-${BUILT_VERSION}.tbz2 go-transip-dyndns README.md
 	@cd ./builds/linux-386 && tar -zcf ../../go-transip-dyndns-linux-386-${BUILT_VERSION}.tgz go-transip-dyndns README.md
+	cp docker/Dockerfile ./builds/linux-386
+	cp docker/docker-compose.yml ./builds/linux-386
+
 
 linuxarm:
 	env GOOS=linux GOARCH=arm go build ${LDFLAGS} -o ./builds/linux-arm/go-transip-dyndns
@@ -55,8 +60,11 @@ linuxarm:
 ifeq ("$(TRAVISBUILD)","off")
 	upx --brute ./builds/linux-arm/go-transip-dyndns
 endif
-	@cd ./builds/linux-386 && tar -jcf ../../go-transip-dyndns-linux-arm-${BUILT_VERSION}.tbz2 go-transip-dyndns README.md
-	@cd ./builds/linux-386 && tar -zcf ../../go-transip-dyndns-linux-arm-${BUILT_VERSION}.tgz go-transip-dyndns README.md
+	@cd ./builds/linux-arm && tar -jcf ../../go-transip-dyndns-linux-arm-${BUILT_VERSION}.tbz2 go-transip-dyndns README.md
+	@cd ./builds/linux-arm && tar -zcf ../../go-transip-dyndns-linux-arm-${BUILT_VERSION}.tgz go-transip-dyndns README.md
+	cp docker/Dockerfile ./builds/linux-arm
+	cp docker/docker-compose.yml ./builds/linux-arm
+
 
 linuxpi:
 	env GOOS=linux GOARCH=arm GOARM=5 go build ${LDFLAGS} -o ./builds/linux-pi/go-transip-dyndns
@@ -66,6 +74,8 @@ ifeq ("$(TRAVISBUILD)","off")
 endif
 	@cd ./builds/linux-pi && tar -jcf ../../go-transip-dyndns-linux-arm-pi-${BUILT_VERSION}.tbz2 go-transip-dyndns README.md
 	@cd ./builds/linux-pi && tar -zcf ../../go-transip-dyndns-linux-arm-pi-${BUILT_VERSION}.tgz go-transip-dyndns README.md
+	cp docker/Dockerfile ./builds/linux-pi
+	cp docker/docker-compose.yml ./builds/linux-pi
 
 
 linuxarm64:
@@ -76,6 +86,8 @@ endif
 	cp README.md ./builds/linux-arm64/
 	@cd ./builds/linux-arm64 && tar -jcf ../../go-transip-dyndns-linux-arm64-${BUILT_VERSION}.tbz2 go-transip-dyndns README.md
 	@cd ./builds/linux-arm64 && tar -zcf ../../go-transip-dyndns-linux-arm64-${BUILT_VERSION}.tgz go-transip-dyndns README.md
+	cp docker/Dockerfile ./builds/linux-arm64
+	cp docker/docker-compose.yml ./builds/linux-arm64
 
 macos:
 	env GOOS=darwin GOARCH=amd64 go build ${LDFLAGS} -o ./builds/macos/go-transip-dyndns
@@ -84,6 +96,8 @@ ifeq ("$(TRAVISBUILD)","off")
 endif
 	cp README.md ./builds/macos/
 	@cd builds/macos/ && zip ../../go-transip-dyndns-macos-amd64-${BUILT_VERSION}.zip go-transip-dyndns README.md
+	cp docker/Dockerfile ./builds/macos
+	cp docker/docker-compose.yml ./builds/macos
 
 windows64:
 	env GOOS=windows GOARCH=amd64 go build ${LDFLAGS} -o ./builds/windows-64/go-transip-dyndns.exe

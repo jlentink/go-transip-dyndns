@@ -16,7 +16,7 @@ const (
 )
 
 var (
-	ipURL = "https://api6.ipify.org?format=json"
+	ipURL = "https://api.ipify.org?format=json"
 )
 
 // GetIP from the ipify service

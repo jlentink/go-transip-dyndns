@@ -12,6 +12,7 @@ func Init() {
 	_config = viper.New()
 	_config.SetConfigType("toml")
 	_config.AddConfigPath("/etc")
+	_config.AddConfigPath("/etc/go-transip-dyndns")
 	_config.AddConfigPath(".")
 	_config.SetConfigName("go-transip-dyndns")
 

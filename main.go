@@ -8,6 +8,7 @@ import (
 )
 
 var (
+	//ApplicationVersion Application version.
 	ApplicationVersion = "1.0.0"
 	rootCmd            = &cobra.Command{
 		Use:     "dyndns",

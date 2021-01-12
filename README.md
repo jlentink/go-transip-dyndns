@@ -37,6 +37,7 @@ Binaries are available for download in multiple formats
 * Windows (32/64 Bit)
 * Linux Intel (32/64 Bit)
 * Linux ARM (32/64 Bit) - Run directly on most routers
+* Linux MIPS 64 - Unifi USG
 * MacOS 64 Bit
 
 Download them [here](https://github.com/jlentink/go-transip-dyndns/releases/latest).

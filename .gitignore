@@ -1,5 +1,3 @@
-# Created by .ignore support plugin (hsz.mobi)
-### Go template
 # Binaries for programs and plugins
 *.exe
 *.exe~
@@ -10,6 +8,7 @@
 *.tbz2
 *.tgz
 *.key
+go-transip-dyndns
 
 # Test binary, built with `go test -c`
 *.test
@@ -20,17 +19,15 @@
 # Dependency directories (remove the comment below to include it)
 # vendor/
 
-.idea/.gitignore
-.idea/go-transip-dyndns.iml
-.idea/misc.xml
-.idea/modules.xml
-.idea/vcs.xml
 cmd/transip-dyndns/private.key
 cmd/transip-dyndns/transip-dyndns
 cmd/transip-dyndns/transip.toml
-go.mod
-go.sum
-internal/gipify/get_test.go
 /go-transip-dyndns.toml
+
+# IDE project files
 /.idea
+
+# OS Artifacts
 .DS_Store
+
+/dist

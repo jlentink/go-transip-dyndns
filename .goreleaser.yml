@@ -1,0 +1,72 @@
+# This is an example .goreleaser.yml file with some sane defaults.
+# Make sure to check the documentation at http://goreleaser.com
+before:
+  hooks:
+    # You may remove this if you don't use go modules.
+    - go mod download
+    # you may remove this if you don't need go generate
+    - go generate ./...
+builds:
+  - env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - 386
+      - amd64
+      - arm
+      - arm64
+      - mips64
+    goarm:
+      - 5
+      - 6
+      - 7
+    ldflags:
+      - -w -s -X main.ApplicationVersion={{.Version}}
+archives:
+  - name_template: '{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}'
+    replacements:
+      darwin: Darwin
+      linux: Linux
+      windows: Windows
+      386: i386
+      amd64: x86_64
+    format_overrides:
+      - goos: windows
+        format: zip
+    files:
+      - README.md
+      - LICENSE.md
+      - example.go-transip-dyndns.toml
+      - completions/*
+checksum:
+  name_template: 'checksums.txt'
+snapshot:
+  name_template: "{{ .Tag }}-next"
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
+dockers:
+  -
+    goos: linux
+    goarch: amd64
+    goarm: ''
+    image_templates:
+      - "jlentink/go-transip-dyndns:{{ .Tag }}-amd64"
+    skip_push: false
+    dockerfile: Dockerfile
+  -
+    goos: linux
+    goarch: arm
+    goarm: 5
+    use_buildx: true
+    image_templates:
+      - "jlentink/go-transip-dyndns:pi-{{ .Tag }}-pi"
+      - "jlentink/go-transip-dyndns:pi-{{ .Tag }}-arm5"
+    skip_push: false
+    dockerfile: Dockerfile

@@ -24,9 +24,13 @@ golintci:
 card:
 	goreportcard-cli -v -t 100
 
-build: linux macos windows
+build:
+	goreleaser build --skip-validate --skip-publish --rm-dist
 
-linux: linux32 linux64 linuxarm linuxarm64 linuxpi
+release:
+	goreleaser release  --skip-validate --skip-publish --rm-dist
+
+linux: linux32 linux64 linuxarm linuxarm64 linuxpi mips64
 
 windows: windows32 windows64
 
@@ -115,3 +119,9 @@ ifeq ("$(TRAVISBUILD)","off")
 endif
 	cp README.md ./builds/windows-32/
 	@cd builds/windows-32/ && zip ../../go-transip-dyndns-windows-386-${BUILT_VERSION}.zip go-transip-dyndns.exe README.md
+
+mips64:
+	env GOOS=linux GOARCH=mips64 go build ${LDFLAGS} -o ./builds/linux-mips64/go-transip-dyndns
+	cp README.md ./builds/linux-mips64/
+	@cd ./builds/linux-mips64 && tar -jcf ../../go-transip-dyndns-linux-mips64-${BUILT_VERSION}.tbz2 go-transip-dyndns README.md
+	@cd ./builds/linux-mips64 && tar -zcf ../../go-transip-dyndns-linux-mips64-${BUILT_VERSION}.tgz go-transip-dyndns README.md

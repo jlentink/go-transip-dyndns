@@ -19,11 +19,13 @@ func Update(cmd *cobra.Command, args []string) {
 	if err != nil {
 		logger.Get().Fatalf("Error accessing the API. please verify configuration (%s)", err.Error())
 	}
+
 	tld.SetRecordInformation(
 		config.Get().GetString("domain"),
 		config.Get().GetString("domain-entry"),
 		config.Get().GetInt("domain-ttl"),
 	)
+
 	changed, err := tld.UpdateRecord(IP)
 	if err != nil {
 		logger.Get().Fatalf("Unable to create record. (%s)", err.Error())

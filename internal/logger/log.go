@@ -31,6 +31,9 @@ func Init() {
 
 // Get Logger setup
 func Get() *logrus.Logger {
+	if _log == nil {
+		Init()
+	}
 	return _log
 }
 

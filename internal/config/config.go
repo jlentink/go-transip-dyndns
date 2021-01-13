@@ -27,5 +27,8 @@ func Init() {
 
 // Get the config instance
 func Get() *viper.Viper {
+	if _config == nil {
+		Init()
+	}
 	return _config
 }

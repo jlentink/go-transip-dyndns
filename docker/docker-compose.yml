@@ -1,7 +1,8 @@
 version: '3.3'
 services:
   dyndns:
-    image: jlentink/go-transip-dyndns
+    image: jlentink/go-transip-dyndns:latest
+    container_name: dyndns
     build: .
     volumes:
      - .:/etc/go-transip-dyndns

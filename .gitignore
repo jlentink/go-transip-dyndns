@@ -19,10 +19,8 @@ go-transip-dyndns
 # Dependency directories (remove the comment below to include it)
 # vendor/
 
-cmd/transip-dyndns/private.key
-cmd/transip-dyndns/transip-dyndns
-cmd/transip-dyndns/transip.toml
-/go-transip-dyndns.toml
+private.key
+go-transip-dyndns.toml
 
 # IDE project files
 /.idea

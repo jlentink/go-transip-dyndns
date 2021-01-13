@@ -11,7 +11,7 @@ var (
 	//ApplicationVersion Application version.
 	ApplicationVersion = "1.0.0"
 	rootCmd            = &cobra.Command{
-		Use:     "dyndns",
+		Use:     "go-transip-dyndns",
 		Short:   "Update ip address on Transip DNS to current public ip ",
 		Long:    "Use the current ip to update to a record in the TransIP dns.\nAllowing for easy updating when your ip changes.",
 		Version: ApplicationVersion,
@@ -25,7 +25,6 @@ var (
 
 func init() {
 	logger.Init()
-	config.Init()
 	rootCmd.PersistentFlags().StringVarP(&userName, "username", "u", "", "Transip username")
 	rootCmd.PersistentFlags().StringVarP(&keyFile, "key", "k", "", "Transip password key file")
 	rootCmd.PersistentFlags().StringVarP(&domain, "domain", "d", "", "The domain (A|AAAA record) for which the ip must be set. (including optional subdomain)")

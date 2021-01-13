@@ -28,7 +28,7 @@ build:
 	goreleaser build --skip-validate --skip-publish --rm-dist
 
 release:
-	goreleaser release  --skip-validate --skip-publish --rm-dist
+	goreleaser release --rm-dist
 
 linux: linux32 linux64 linuxarm linuxarm64 linuxpi mips64
 

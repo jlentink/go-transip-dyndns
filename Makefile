@@ -4,6 +4,7 @@ BUILT_VERSION=v1.0.2
 LDFLAGS=-ldflags "-X main.ApplicationVersion=${BUILT_VERSION} -w -s"
 TRAVISBUILD?=off
 all: clean linting test-release
+ROOT_DIR:=$(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 
 clean:
 	@-rm test-report.out
@@ -33,3 +34,9 @@ release:
 
 test-release:
 	goreleaser release --rm-dist --skip-validate --skip-publish
+
+test-docker:
+	docker run --rm -v ${ROOT_DIR}/go-transip-dyndns.toml:/etc/go-transip-dyndns.toml jlentink/go-transip-dyndns:latest
+
+test-docker-shell:
+	 docker run -it --rm -v ${ROOT_DIR}/go-transip-dyndns.toml:/etc/go-transip-dyndns.toml jlentink/go-transip-dyndns:latest /bin/sh

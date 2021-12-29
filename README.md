@@ -176,3 +176,4 @@ This tool has been created for me own comfort. There is no association with Tran
 
 ## Todo:
 1. Code clean-up
+2. DNS based change check (not only API)

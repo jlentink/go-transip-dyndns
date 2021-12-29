@@ -5,7 +5,7 @@ Is a small little executable that will update a domain record of your choice tha
 
 ## Setup
 1. Make sure you have a domain at Transip
-2. Create a access key for the API. `(Control panel > My Account > API)`
+2. Create an access key for the API. `(Control panel > My Account > API)`
 3. Add a label and press create.
 4. Save Key to a file. `e.g. privatekey.pem`
 5. Create config file. [Example config file](#example-config-file)

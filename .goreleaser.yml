@@ -26,7 +26,7 @@ builds:
     gomips:
       - softfloat
     ldflags:
-      - -w -s -X main.ApplicationVersion={{.Version}}
+      - -w -s -X main.ApplicationVersion={{.Version}} -X main.CommitHash={{.ShortCommit}} -X main.BuildDate={{.Date}}
     mod_timestamp: '{{ .CommitTimestamp }}'
 archives:
   - name_template: '{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}'
@@ -68,7 +68,7 @@ dockers:
     goos: linux
     goarch: arm
     goarm: 5
-    use_buildx: true
+    use: buildx
     image_templates:
       - "jlentink/go-transip-dyndns:pi-{{ .Tag }}-pi"
       - "jlentink/go-transip-dyndns:pi-{{ .Tag }}-arm5"

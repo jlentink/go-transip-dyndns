@@ -19,7 +19,7 @@ func (splitter *outputSplitter) Write(p []byte) (n int, err error) {
 }
 
 // Init Logger setup
-func Init() {
+func init() {
 	_log = &logrus.Logger{
 		Out:   &outputSplitter{},
 		Level: logrus.InfoLevel,
@@ -31,9 +31,6 @@ func Init() {
 
 // Get Logger setup
 func Get() *logrus.Logger {
-	if _log == nil {
-		Init()
-	}
 	return _log
 }
 
@@ -41,6 +38,6 @@ func Get() *logrus.Logger {
 func SetVerbose(v bool) {
 	if v {
 		_log.SetLevel(logrus.DebugLevel)
+		_log.Debug("Log level set to debug...\n")
 	}
-	_log.Debug("Log level set to debug...\n")
 }

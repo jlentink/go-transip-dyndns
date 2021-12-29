@@ -1,8 +1,94 @@
-username = "username"
-private-key = "/path/to/private.key"
-
+[general]
+#
+# Enable verbose mode (debugging information).
+# Disabled by default.
+#
 verbose = false
 
-domain = "yourdomain.nl"
-domain-entry = "subdomain"
-domain-ttl = 60
+#
+# Pull in your public IPv4 address.
+#
+IPv4 = true
+
+#
+# Pull in your public IPv6 address.
+# Only use when you have an IPv6 address.
+#
+IPv6 = false
+
+#
+# Update in keep running mode every x (in minutes)
+#
+update-frequency = 1
+
+[account]
+#
+# Your account name on transip.
+#
+username = "your-account name"
+#
+# Private key to get access the API.
+# Create your own key here: https://www.transip.nl/cp/account/api/.
+#
+# You have two options here.
+# Include the private key in the configuration file.
+#
+# Example:
+# private-key = """-----BEGIN PRIVATE KEY-----
+#...Your certificate data...
+#-----END PRIVATE KEY-----"""
+#
+# or
+#
+# provide the path to the file that contains the private key.
+#
+# Example:
+# private-key = "/path/to/key.pem"
+#
+# Mind the """content""" (3x) quote for including the key in the config and the "path" (1) for the path...
+#
+private-key = """-----BEGIN PRIVATE KEY-----
+...Your certificate data...
+-----END PRIVATE KEY-----"""
+
+#
+# The DNS record you want to update.
+# You can have as many as you want.
+#
+#[[record]]
+#
+# the domain name where the record should be updated.
+#
+#hostname = "example.com"
+#
+# The entry key for the domain
+# in this example my-home.example.com is the full dns entry we are creating here.
+#
+# use @ if you want to redirect the root domain.
+#
+#entry = "my-home"
+#
+# The caching time in seconds.
+#
+#ttl = 60
+#
+# The record type.
+# A for IPv4
+# AAAA for IPv6
+# but can also be MX TXT SRV
+#
+#type = "A"
+#
+# content that will be pushed into the record.
+# this value is ignored for A and AAAA records.
+# for other records you can use the placeholders {{.IPv4}} and {{.IPv6}}
+# to inject the IP's
+#
+# content = ""
+
+[[record]]
+hostname = "example.com"
+entry = "my-home"
+ttl = 60
+type = "A"
+content = ""

@@ -3,7 +3,7 @@ package gipify
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/jlentink/go-transip-dyndns/internal/logger"
+	"go-transip-dyndns/internal/logger"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -16,21 +16,33 @@ const (
 )
 
 var (
-	ipURL = "https://api.ipify.org?format=json"
+	IPv4URL = "https://api.ipify.org?format=json"
+	IPv6URL = "https://api64.ipify.org?format=json"
 )
 
-// GetIP from the ipify service
-func GetIP() (*IP, error) {
-	res, err := http.Get(ipURL)
+// GetIPv4 from the ipify service IPv4
+func GetIPv4() (*IP, error) {
+	resp, err := http.Get(IPv4URL)
 	if err != nil {
 		return nil, err
 	}
-	defer res.Body.Close() // nolint: errcheck
-
-	if res.StatusCode != 200 {
-		return nil, fmt.Errorf("http status should be 200 is %d", res.StatusCode)
+	if resp.StatusCode != 200 {
+		return nil, fmt.Errorf("http status should be 200 is %d", resp.StatusCode)
 	}
-	return parse(res.Body)
+	return parse(resp.Body)
+}
+
+// GetIPv6 from the ipify service IPv6
+func GetIPv6() (*IP, error) {
+	resp, err := http.Get(IPv6URL)
+	if err != nil {
+		return nil, err
+	}
+
+	if resp.StatusCode != 200 {
+		return nil, fmt.Errorf("http status should be 200 is %d", resp.StatusCode)
+	}
+	return parse(resp.Body)
 }
 
 func parse(i io.Reader) (*IP, error) {

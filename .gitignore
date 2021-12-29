@@ -29,3 +29,6 @@ go-transip-dyndns.toml
 .DS_Store
 
 /dist
+
+dist/
+/vendor/

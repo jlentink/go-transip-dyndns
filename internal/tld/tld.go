@@ -2,11 +2,11 @@ package tld
 
 import (
 	"fmt"
-	"github.com/jlentink/go-transip-dyndns/internal/gipify"
-	"github.com/jlentink/go-transip-dyndns/internal/logger"
 	"github.com/transip/gotransip/v6"
 	"github.com/transip/gotransip/v6/domain"
 	"github.com/transip/gotransip/v6/repository"
+	"go-transip-dyndns/internal/gipify"
+	"go-transip-dyndns/internal/logger"
 )
 
 var _transip *repository.Client

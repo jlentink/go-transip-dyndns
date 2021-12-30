@@ -31,9 +31,8 @@ func CreateRecord(record config.Record) error {
 	if err != nil {
 		return err
 	}
-	getDomainRepo().AddDNSEntry(record.Hostname, entry)
+	return getDomainRepo().AddDNSEntry(record.Hostname, entry)
 
-	return nil
 }
 
 func createDNSEntry(record config.Record) (domain.DNSEntry, error) {
@@ -53,7 +52,8 @@ func createDNSEntry(record config.Record) (domain.DNSEntry, error) {
 	case "CNAME":
 		fallthrough
 	case "MX":
-		fallthrough
+		entry, err = createGenericEntry(record)
+		//fallthrough
 	case "TXT":
 		fallthrough
 	case "SRV":
@@ -74,7 +74,7 @@ func createAEntry(record config.Record) (domain.DNSEntry, error) {
 	entry := domain.DNSEntry{
 		Name:    record.Entry,
 		Expire:  record.TTL,
-		Type:    record.Type,
+		Type:    record.GetType(),
 		Content: ip.IP,
 	}
 	return entry, nil
@@ -92,7 +92,7 @@ func createAAAAEntry(record config.Record) (domain.DNSEntry, error) {
 	entry := domain.DNSEntry{
 		Name:    record.Entry,
 		Expire:  record.TTL,
-		Type:    record.Type,
+		Type:    record.GetType(),
 		Content: ip.IP,
 	}
 	return entry, nil
@@ -135,7 +135,7 @@ func createGenericEntry(record config.Record) (domain.DNSEntry, error) {
 	entry := domain.DNSEntry{
 		Name:    record.Entry,
 		Expire:  record.TTL,
-		Type:    record.Type,
+		Type:    record.GetType(),
 		Content: buf.String(),
 	}
 	return entry, nil

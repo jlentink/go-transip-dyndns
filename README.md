@@ -13,6 +13,7 @@ Is a small little executable that will update a domain record of your choice tha
 7. run `go-transip-dyndns create` to create the record
 8. run `go-transip-dyndns validate` to see if all is 👍
 9. You are set. Well done!
+10. For a docker install see [Docker](#docker) section
 
 
 ## The configuration file
@@ -44,7 +45,7 @@ end of the certificate. Ensure you don't put any spaces in the key structure to 
     ...Your certificate data...
     -----END PRIVATE KEY-----"""
 
-#### TXT, MX etc records.
+#### TXT, records.
 These records are handy and can have more markup than just an IP. For this purpose you have the ability to
 completly format the record and just inject the IP addresses. This can be done to inject a ip via the tags:
 
@@ -167,6 +168,34 @@ Binaries are available for download in multiple formats
 * MacOS 64 Bit
 
 Download them [here](https://github.com/jlentink/go-transip-dyndns/releases/latest).
+
+## Docker
+For easy usage I personally run it via [docker-compose](https://docs.docker.com/compose/) with a file similar to the one shown below. 
+
+    version: '3.3'
+    services:
+      go-transip-dyndns:
+        image: jlentink/go-transip-dyndns:latest
+        container_name: go-transip-dyndns
+        volumes:
+          - ./go-transip-dyndns.toml:/etc/go-transip-dyndns.toml
+        restart: unless-stopped
+
+### Verify the setup
+Verify the setup by running the following command in the terminal where the docker-compose file is stored.
+It will verify the setup and output the results
+
+    docker-compose run --rm --entrypoint /usr/bin/go-transip-dyndns go-transip-dyndns -v verify
+
+###  Run create records
+To create the initial records run:
+
+    docker-compose run --rm --entrypoint /usr/bin/go-transip-dyndns go-transip-dyndns -v create
+
+### start the client
+Now all is created start the client as a deamon.
+
+    docker-compose up go-transip-dyndns -d
 
 ## No association with Transip
 This tool has been created for me own comfort. There is no association with Transip. But I would like to thank TransIP for there fine service!

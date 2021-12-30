@@ -64,12 +64,12 @@ func main() {
 	}
 
 	updateCmd := &cobra.Command{
-		Use:     "update",
-		Short:   "Update ip address on Transip DNS to current public ip (default command)",
-		Long:    "Use the current ip to update to a record in the TransIP dns.\nAllowing for easy updating when your ip changes.",
-		Example: "",
-
-		Run: commands.Update,
+		Use:              "update",
+		Short:            "Update ip address on Transip DNS to current public ip (default command)",
+		Long:             "Use the current ip to update to a record in the TransIP dns.\nAllowing for easy updating when your ip changes.",
+		Example:          "",
+		PersistentPreRun: commands.PreRun,
+		Run:              commands.Update,
 	}
 	updateCmd.PersistentFlags().BoolVarP(&keepRunning, "keep-alive", "k", false, "keep running continuously.")
 

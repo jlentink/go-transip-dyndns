@@ -1,5 +1,7 @@
 package config
 
+import "strings"
+
 type ConfigObject struct {
 	General General  `toml:"general"`
 	Account Account  `toml:"account"`
@@ -20,4 +22,8 @@ type Record struct {
 	Content  string `toml:"content"`
 	TTL      int    `toml:"ttl"`
 	Type     string `toml:"type"`
+}
+
+func (r *Record) GetType() string {
+	return strings.ToUpper(r.Type)
 }

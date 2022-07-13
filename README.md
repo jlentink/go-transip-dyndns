@@ -185,7 +185,7 @@ For easy usage I personally run it via [docker-compose](https://docs.docker.com/
 Verify the setup by running the following command in the terminal where the docker-compose file is stored.
 It will verify the setup and output the results
 
-    docker-compose run --rm --entrypoint /usr/bin/go-transip-dyndns go-transip-dyndns -v verify
+    docker-compose run --rm --entrypoint /usr/bin/go-transip-dyndns go-transip-dyndns -v validate
 
 ###  Run create records
 To create the initial records run:

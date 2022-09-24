@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"go-transip-dyndns/internal/logger"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"regexp"
 )
@@ -47,7 +46,7 @@ func GetIPv6() (*IP, error) {
 
 func parse(i io.Reader) (*IP, error) {
 	respIp := IP{Type: UNKNOWN}
-	resp, err := ioutil.ReadAll(i)
+	resp, err := io.ReadAll(i)
 	if err != nil {
 		return nil, err
 	}
